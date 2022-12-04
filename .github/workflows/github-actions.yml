@@ -10,7 +10,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - run: docker build -t hamzabll5858/assessment-backend:latest -t assessment-backend:latest ./backend/
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: "{{defaultContext}}:backend"
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            hamzabll5858/assessment-backend:latest
+            assessment-backend:latest
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
