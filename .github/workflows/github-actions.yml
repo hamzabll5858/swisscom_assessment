@@ -13,7 +13,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: "/backend"
+          context: "{{defaultContext}}:backend"
           platforms: linux/amd64
           push: true
           tags: |
