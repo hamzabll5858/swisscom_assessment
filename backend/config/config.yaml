@@ -1,0 +1,7 @@
+database:
+  url: "localhost:5432"
+  username: "postgres"
+  password: "postgres"
+  database: "moviesdb"
+server:
+  url: "localhost:8080"

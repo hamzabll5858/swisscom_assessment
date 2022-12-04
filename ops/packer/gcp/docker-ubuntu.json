@@ -1,0 +1,47 @@
+{
+  "variables": {
+    "account_file": "{{ env `GOOGLE_APPLICATION_CREDENTIALS` }}"
+  },
+
+  "builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "root-project-5858",
+      "source_image_family": "ubuntu-1804-lts",
+      "zone": "us-central1-a",
+      "ssh_username": "root",
+      "image_name": "assessment-ubuntu-ami",
+      "image_description": "For Assessment.",
+      "image_storage_locations": ["us-central1"],
+      "image_labels": {
+        "developer": "hamza",
+        "team": "devops"
+      },
+      "service_account_email": "packer@root-project-5858.iam.gserviceaccount.com"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get clean",
+        "sudo apt-get update",
+        "sudo apt-get install -y apt-transport-https ca-certificates nfs-common",
+        "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
+        "sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\"",
+        "sudo apt-get update",
+        "sudo apt-get install -y docker-ce",
+        "sudo usermod -aG docker ubuntu"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo systemctl daemon-reload",
+        "sudo systemctl restart docker"
+      ]
+    }
+  ],
+  "post-processors": [
+  ]
+}
