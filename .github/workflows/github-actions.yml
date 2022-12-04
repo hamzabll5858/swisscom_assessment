@@ -29,5 +29,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            hamzabll5858/assessment-backend:latest
             assessment-backend:latest
