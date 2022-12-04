@@ -28,5 +28,4 @@ jobs:
           file: ./backend/Dockerfile
           push: true
           tags: |
-            hamzabll5858/assessment-backend:latest
-            assessment-backend:latest
+            registry.hub.docker.com/hamzabll5858/assessment-backend:latest
